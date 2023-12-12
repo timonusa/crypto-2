@@ -1,0 +1,7 @@
+FROM ubuntu:latest
+
+RUN apt-get update
+
+RUN apt-get install golang -y
+
+CMD cd /app/client && go run main.go

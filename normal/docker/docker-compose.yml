@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    networks:
+      - mynetwork
+    volumes:
+      - ./../server/:/app/server
+    ports:
+      - 8000:8000
+    stdin_open: true
+
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile-client
+    networks:
+      - mynetwork
+    volumes:
+      - ./../client/:/app/client
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server
+    restart: always
+
+networks:
+  mynetwork:
+    driver: bridge
